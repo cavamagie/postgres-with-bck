@@ -10,7 +10,7 @@ ENV DBHOST localhost
 ENV PGPASSWORD **None**
 ENV DBNAMES all
 ENV SCHEDULE '@daily'
-COPY files/autopgsqlbackup.sh go-cron ./
+COPY files/autopgsqlbackup.sh files/go-cron ./
 RUN chmod -R 777 autopgsqlbackup.sh go-cron
 RUN apt-get update \
       && apt-get install -y --no-install-recommends \
