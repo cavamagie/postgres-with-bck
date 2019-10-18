@@ -10,13 +10,18 @@ ENV DBHOST localhost
 ENV PGPASSWORD **None**
 ENV DBNAMES all
 ENV SCHEDULE '@daily'
-COPY files/autopgsqlbackup.sh files/go-cron ./
+COPY files/autopgsqlbackup.sh files/go-cron files/crontab ./
 RUN chmod -R 777 autopgsqlbackup.sh go-cron
 RUN apt-get update \
       && apt-get install -y --no-install-recommends \
       postgresql-10-postgis-$POSTGIS_MAJOR \
       postgresql-10-postgis-scripts \
+      curl \
       && rm -rf /var/lib/apt/lists/*
+
+COPY crontab /etc/cron.d/postgres-bck
+RUN chmod 0644 /etc/cron.d/postgres-bck
+RUN service cron start
 
 # cleanup
 RUN apt-get -qy autoremove
@@ -29,8 +34,6 @@ RUN mkdir -p /docker-entrypoint-initdb.d
 
 VOLUME /backups
 
-ENTRYPOINT ["/bin/sh", "-c"]
-CMD ["exec ./go-cron -s \"$SCHEDULE\" -p 8686 -- /autopgsqlbackup.sh"]
 
-HEALTHCHECK --interval=5m --timeout=5s \
-  CMD curl -f http://localhost:8686/ || exit 1
+#HEALTHCHECK --interval=5m --timeout=5s \
+#  CMD curl -f http://localhost:8686/ || exit 1

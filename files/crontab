@@ -1,0 +1,2 @@
+* 1 * * * /autopgsqlbackup.sh > /backup
+# Mandatory blank line
