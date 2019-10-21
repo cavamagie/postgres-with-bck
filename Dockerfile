@@ -2,7 +2,7 @@ FROM postgres:10.7
 
 MAINTAINER cavamagie
 
-ENV POSTGIS_MAJOR 2.5
+ENV POSTGIS_MAJOR 2.4
 ENV POSTGRES_USER postgres
 ENV POSTGRES_PASS postgres
 ENV BACKUP_DIR '/backups'
@@ -13,10 +13,9 @@ ENV SCHEDULE '@daily'
 COPY files/autopgsqlbackup.sh ./
 RUN chmod -R 777 autopgsqlbackup.sh
 RUN apt-get update \
-      && apt-get install -y --no-install-recommends \
+      && apt-get install -y -f \
       postgresql-10-postgis-$POSTGIS_MAJOR \
-      postgresql-10-postgis-$POSTGIS_MAJOR-scripts \
-      libgeos-c1v5
+     # postgresql-10-postgis-$POSTGIS_MAJOR-scripts \
       && rm -rf /var/lib/apt/lists/*
 
 # cleanup
