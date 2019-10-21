@@ -1,6 +1,6 @@
 FROM postgres:10.7
 
-MAINTAINER LLC Itmicus <order@itmicus.ru>
+MAINTAINER cavamagie
 
 ENV POSTGIS_MAJOR 2.5
 ENV POSTGRES_USER postgres
@@ -32,4 +32,4 @@ VOLUME /backups
 
 
 HEALTHCHECK --interval=5m --timeout=5s \
-  CMD curl -f http://localhost:5432/ || exit 1
+  CMD pg_isready || exit 1
