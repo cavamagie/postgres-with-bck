@@ -16,7 +16,7 @@ RUN apt-get update \
       && apt-get install -y --no-install-recommends \
       postgresql-10-postgis-$POSTGIS_MAJOR \
       postgresql-10-postgis-$POSTGIS_MAJOR-scripts \
-      curl \
+      libgeos-c1v5
       && rm -rf /var/lib/apt/lists/*
 
 # cleanup
