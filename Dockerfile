@@ -30,6 +30,5 @@ RUN mkdir -p /docker-entrypoint-initdb.d
 
 VOLUME /backups
 
-
 HEALTHCHECK --interval=5m --timeout=5s \
   CMD pg_isready || exit 1
