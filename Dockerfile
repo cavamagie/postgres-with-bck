@@ -5,7 +5,7 @@ MAINTAINER cavamagie
 ENV POSTGIS_MAJOR 2.5
 ENV POSTGRES_USER postgres
 ENV POSTGRES_PASS postgres
-ENV BACKUP_DIR '/backups'
+ENV BACKUP_DIR '/var/lib/postgresql/backup-db'
 ENV DBHOST localhost
 ENV PGPASSWORD **None**
 ENV DBNAMES 'all'
