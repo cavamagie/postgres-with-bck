@@ -13,9 +13,9 @@ ENV SCHEDULE '@daily'
 COPY files/autopgsqlbackup.sh ./
 RUN chmod -R 777 autopgsqlbackup.sh
 RUN apt-get update \
-      && apt-get install -y  \
+      && apt-get install -y --no-install-recommends \
       postgresql-10-postgis-$POSTGIS_MAJOR \
-      postgresql-10-postgis-scripts \
+      postgresql-10-postgis-$POSTGIS_MAJOR-scripts \
       curl \
       && rm -rf /var/lib/apt/lists/*
 
